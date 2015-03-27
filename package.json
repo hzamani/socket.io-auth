@@ -1,6 +1,6 @@
 {
   "name": "socket.io-auth",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Authenticate socket.io connections without using querystrings",
   "main": "index.js",
   "scripts": {
