@@ -30,7 +30,7 @@ auth = function(data, done) {
 };
 
 require('socket.io-auth')(io, auth, function(socket){
-  // use socket as before to impediment other signals
+  // use socket as before to implement other signals
   socket.on('ping', function(data){
     socket.emit('pong', data);
   });
