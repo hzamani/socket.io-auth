@@ -1,7 +1,7 @@
 {
   "name": "socket.io-auth",
   "version": "0.0.1",
-  "description": "Authentication module for socket.io",
+  "description": "Authenticate socket.io connections without using querystrings",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -r specs/helper.js specs/auth_specs.coffee",
