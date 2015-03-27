@@ -5,7 +5,7 @@ auth = (data, done) ->
   if data.token == 'sometoken!'
     done()
   else
-    done('unauthorized')
+    done(new Error 'unauthorized')
 
 authenticate io, auth, (socket) ->
   socket.on 'ping', (data) ->

@@ -8,12 +8,14 @@ module.exports = (io, auth, options, callback) ->
   timeout = (time, fn) -> setTimeout(fn, time)
 
   io.on 'connection', (socket) ->
-    disconnect = (message='unauthorized') ->
-      # FIXME: socket.emit 'error', message
-      socket.disconnect(message)
+    disconnect = (error='unauthorized') ->
+      if error instanceof Error
+        error = error.message
+      socket.emit 'unauthenticated', error
+      socket.disconnect()
 
     timeout options.timeout, ->
-      disconnect('unauthorized') unless socket.authenticated
+      disconnect('authentication timeout') unless socket.authenticated
 
     socket.authenticated = false
     socket.on 'authenticate', (data) ->

@@ -12,15 +12,19 @@
     };
     return io.on('connection', function(socket) {
       var disconnect;
-      disconnect = function(message) {
-        if (message == null) {
-          message = 'unauthorized';
+      disconnect = function(error) {
+        if (error == null) {
+          error = 'unauthorized';
         }
-        return socket.disconnect(message);
+        if (error instanceof Error) {
+          error = error.message;
+        }
+        socket.emit('unauthenticated', error);
+        return socket.disconnect();
       };
       timeout(options.timeout, function() {
         if (!socket.authenticated) {
-          return disconnect('unauthorized');
+          return disconnect('authentication timeout');
         }
       });
       socket.authenticated = false;

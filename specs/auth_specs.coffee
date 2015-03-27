@@ -12,22 +12,20 @@ describe 'socket.io-auth', ->
 
   beforeEach ->
     socket = io(url, {'force new connection': true})
-    socket.on 'error', (error) ->
-      console.log 'error', error
 
   afterEach ->
     socket.disconnect()
 
   context 'before authentication', ->
-    it 'matks socket as unauthenticated', ->
+    it 'marks socket as unauthenticated', ->
       expect(socket.authenticated).to.not.be.ok
 
     it 'dose not sent messages to sockets', (done) ->
       socket.on 'pong', ->
-        done(new Erro 'got message while unauthorized')
+        done(new Error 'got message while unauthorized')
       timeout 500, done
 
-    it 'disconnects unauthenticated sockets', (done) ->
+    it 'disconnects unauthenticated sockets after timeout window', (done) ->
       socket.on 'disconnect', ->
         done()
 
@@ -41,6 +39,12 @@ describe 'socket.io-auth', ->
     context 'with invalid cridentials', ->
       it 'disconnects the socket', (done) ->
         socket.on 'disconnect', ->
+          done()
+        socket.emit 'authenticate', invalidCridentials
+
+      it 'emits unauthenticated signal with error message', (done) ->
+        socket.on 'unauthenticated', (data) ->
+          expect(data).to.not.be.empty
           done()
         socket.emit 'authenticate', invalidCridentials
 
