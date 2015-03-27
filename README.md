@@ -1,10 +1,10 @@
 # socket.io-auth
 
 It provides a hook to authenticate [socket.io](https://github.com/Automattic/socket.io)
-without using querystrings to send credentials, which is not a good security practice.
+without using query-strings to send credentials, which is not a good security practice.
 
-It works by deling access to socket object for geting `authenticate` event, and
-use given function to authenticate submited cridentials.
+It works by preventing access to socket object before authentication, which is
+done by given auth function and submitted credentials on `authenticate` event.
 
 ## Installation
 
@@ -21,16 +21,16 @@ var io = require('socket.io')(4000)
 
 // setup and authentication method
 auth = function(data, done) {
-  // check for valid cridental data
+  // check for valid credential data
   if (data.token == 'test') {
     done();
   } else {
-    done(new Error('bad cridentials')) // or any error message
+    done(new Error('bad credentials')) // or any error message
   }
 };
 
 require('socket.io-auth')(io, auth, function(socket){
-  // use socket as before to impeliment other signals
+  // use socket as before to impediment other signals
   socket.on('ping', function(data){
     socket.emit('pong', data);
   });
@@ -72,12 +72,12 @@ $ npm test
       ✓ dose not sent messages to sockets
       ✓ disconnects unauthenticated sockets after timeout window
     on authentication
-      with valid cridentials
+      with valid credentials
         ✓ authenticates and emits authenticated signal
-      with invalid cridentials
+      with invalid credentials
         ✓ disconnects the socket
         ✓ emits unauthenticated with error message
     after authentication
-      ✓ handel all signals normally
+      ✓ handles all signals normally
 ```
 

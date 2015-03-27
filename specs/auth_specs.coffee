@@ -5,7 +5,7 @@ url = "http://localhost:#{port}"
 server.listen(port)
 
 validCredentials = {token: "sometoken!"}
-invalidCridentials = {token: "bad token"}
+invalidCredentials = {token: "bad token"}
 
 describe 'socket.io-auth', ->
   socket = null
@@ -30,17 +30,17 @@ describe 'socket.io-auth', ->
         done()
 
   context 'on authentication', ->
-    context 'with valid cridentials', ->
+    context 'with valid credentials', ->
       it 'authenticates and emits authenticated signal', (done) ->
         socket.on 'authenticated', ->
           done()
         socket.emit 'authenticate', validCredentials
 
-    context 'with invalid cridentials', ->
+    context 'with invalid credentials', ->
       it 'disconnects the socket', (done) ->
         socket.on 'disconnect', ->
           done()
-        socket.emit 'authenticate', invalidCridentials
+        socket.emit 'authenticate', invalidCredentials
 
       it 'emits unauthenticated signal with error message', (done) ->
         socket.on 'unauthenticated', (data) ->
@@ -49,7 +49,7 @@ describe 'socket.io-auth', ->
         socket.emit 'authenticate', invalidCridentials
 
   context 'after authentication', ->
-    it 'handel all signals normally', (done) ->
+    it 'handles all signals normally', (done) ->
       socket.emit 'authenticate', {token: 'sometoken!'}
       socket.on 'pong', (data) ->
         if data == 'test message'
