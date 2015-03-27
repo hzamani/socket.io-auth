@@ -49,7 +49,7 @@ describe 'socket.io-auth', ->
         socket.emit 'authenticate', invalidCridentials
 
   context 'after authentication', ->
-    it 'handel all signals normaly', (done) ->
+    it 'handel all signals normally', (done) ->
       socket.emit 'authenticate', {token: 'sometoken!'}
       socket.on 'pong', (data) ->
         if data == 'test message'

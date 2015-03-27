@@ -78,6 +78,6 @@ $ npm test
         ✓ disconnects the socket
         ✓ emits unauthenticated with error message
     after authentication
-      ✓ handel all signals normaly
+      ✓ handel all signals normally
 ```
 
