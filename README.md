@@ -37,7 +37,7 @@ require('socket.io-auth')(io, auth, function(socket){
 });
 ```
 
-you can set authentication window with timeout option:
+you can set authentication window with timeout option (default is 1s (1000ms)):
 
 ```javascript
 require('socket.io-auth')(io, auth, {timeout: 2000}, function(socket){
