@@ -1,5 +1,7 @@
 # socket.io-auth
 
+[![Build Status](https://travis-ci.org/hzamani/socket.io-auth.svg?branch=master)](https://travis-ci.org/hzamani/socket.io-auth)
+
 It provides a hook to authenticate [socket.io](https://github.com/Automattic/socket.io)
 without using query-strings to send credentials, which is not a good security practice.
 
