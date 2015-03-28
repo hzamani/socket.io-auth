@@ -46,7 +46,7 @@ describe 'socket.io-auth', ->
         socket.on 'unauthenticated', (data) ->
           expect(data).to.not.be.empty
           done()
-        socket.emit 'authenticate', invalidCridentials
+        socket.emit 'authenticate', invalidCredentials
 
   context 'after authentication', ->
     it 'handles all signals normally', (done) ->
